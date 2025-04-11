@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+
+export async function getStaticPaths() {
+  const curl =
+    "https://naqotdixmvkmxlfitrst.supabase.co/rest/v1/products?select=*";
+
+  const apikey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5hcW90ZGl4bXZrbXhsZml0cnN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyNjgxNjksImV4cCI6MjA1OTg0NDE2OX0.QEKabtlSzIXwoVA_69Agvl81ayHtTYi0FKWk_tb__t4";
+
+  const options = {
+    headers: {
+      apikey: apikey,
+    },
+  };
+
+  const response = await fetch(curl, options);
+  const data = await response.json();
+
+  return data.map((data) => {
+    return {
+      params: { id: data.id },
+      props: { data },
+    };
+  });
+}
+
+const { id } = Astro.params;
+const { data } = Astro.props;
+---
+
+<Layout>
+  <Header />
+  <article>
+    <h2>{data.membertype}</h2>
+    <img src={"../images/" + data.image} alt={data.imagedescr} />
+    <h3>{data.name}</h3>
+    <p>{data.email}</p>
+    <p>{data.phone}</p>
+  </article>
+  <Footer />
+</Layout>
+
+<style>
+  body {
+    background-color: blanchedalmond;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  article {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    background-color: #f9f9f9;
+    max-width: 500px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+</style>
