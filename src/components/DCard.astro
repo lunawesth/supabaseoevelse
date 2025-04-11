@@ -1,0 +1,49 @@
+---
+const { data } = Astro.props;
+---
+
+<a href={"member/" + data.id}>
+  <article>
+    <img src={"images/" + data.image} alt={data.imagedescr} />
+    <h3>{data.name}</h3>
+    <p>{data.email}</p>
+    <p>{data.phone}</p>
+  </article>
+</a>
+
+<style>
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  article {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+</style>
