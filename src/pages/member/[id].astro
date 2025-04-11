@@ -35,7 +35,7 @@ const { data } = Astro.props;
   <Header />
   <article>
     <h2>{data.membertype}</h2>
-    <img src={"../images/" + data.image} alt={data.imagedescr} />
+    <img src={"../public/images/" + data.image} alt={data.imagedescr} />
     <h3>{data.name}</h3>
     <p>{data.email}</p>
     <p>{data.phone}</p>
